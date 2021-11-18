@@ -1,0 +1,51 @@
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Project Specific
+src/CMakeFiles/
+src/CMakeCache.txt
+src/cmake_install.cmake
+src/Makefile
+src/benchmark
+src/build
+
+src/tests/CMakeFiles/
+src/tests/CMakeCache.txt
+src/tests/cmake_install.cmake
+src/tests/Makefile
+src/tests/tests
+src/tests/build
+
+build/
+logs/
