@@ -56,8 +56,11 @@ Parameter                   | Function                                          
 ## Testing
 For building and running tests, run the following commands in ```tests/build/```
 ```
+cd tests
+git clone https://github.com/google/googletest.git
+mkdir build
+cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=[PATH TO SEAL]
 make
 ./tests
-
 ```
