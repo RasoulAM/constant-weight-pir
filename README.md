@@ -13,9 +13,9 @@ This repository contains the experimental code for Constant-weight PIR using con
 ## Dependencies
 The project requires the following dependencies:
 * Microsoft SEAL (version 3.6)
-
+* Google Tests (for testing)
 ## Building the Project
-The project can me build using the following command in ```src/build```
+The project can be built using the following command in ```src/build```
 ```
 cmake ..
 make 
@@ -53,4 +53,11 @@ Parameter                   | Function                                          
 ./main --num_keywords=10 --hamming_weight=2 --write_path=results/
 ```
 
+## Testing
+For building and running tests, run the following commands in ```tests/build/```
+```
+cmake .. -DCMAKE_INSTALL_PREFIX=[PATH TO SEAL]
+make
+./tests
 
+```
