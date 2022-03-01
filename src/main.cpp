@@ -71,7 +71,7 @@ int main(int argc, char *argv[]){
             {"log_poly_mod_degree",  optional_argument, NULL,  'd' },
             {"num_keywords",         optional_argument, NULL,  'n' },
             {"keyword_bitlength",    optional_argument, NULL,  'x' },
-            {"response_bytesize",    optional_argument, NULL,  'n' },
+            {"response_bytesize",    optional_argument, NULL,  's' },
             {"verbose",              no_argument,       NULL,  'v' },
             {"write_path",           optional_argument, NULL,  'w' },
             {"num_threads",          optional_argument, NULL,  't' },

@@ -42,6 +42,7 @@ class PIRserver{
     void generate_selection_vector(QueryParameters* q_params, vector<Ciphertext>& expanded_query,  vector<Ciphertext>& selection_vector, bool _verbose);
     vector<Ciphertext> multiply_with_database(QueryParameters* q_params, uint64_t _subindex, Ciphertext& encrypted_selection_bit);
     void inner_product(QueryParameters* q_params, vector<Ciphertext>& selection_vector, vector<Ciphertext>& encrypted_answer, bool _verbose);
+    void faster_inner_product(QueryParameters* q_params, vector<Ciphertext>& selection_vector, vector<Ciphertext>& encrypted_answer, bool _verbose);
     void set_params(stringstream &parms_stream, stringstream &sk_stream, bool _verbose=true);
     void respond_pir_query(stringstream &data_stream, QueryParameters *q_params, bool _verbose=true);
 

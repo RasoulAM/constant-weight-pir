@@ -1026,86 +1026,93 @@ void benchmark_ops(uint64_t log_poly_modulus_degree=13, int RUNS=1000){
     }
 }
 
-int main(){
-    benchmark_ops(11);
-    benchmark_ops(12);
-    benchmark_ops(13);
-    benchmark_ops(14);
+// int main(){
+//     benchmark_ops(11);
+//     benchmark_ops(12);
+//     benchmark_ops(13);
+//     benchmark_ops(14);
+// }
+
+uint64_t code_size_from_ell(uint64_t ell, uint64_t k){
+    return find_log2_choose(k, ell);
 }
 
-// int main(int argc, char *argv[]){ 
-//     uint64_t hamming_weight=2, log_poly_mod_degree=13, code_size, alpha = 0, bitlength, ell=0;
-//     bool batched=false, parallel=false;
+int main(int argc, char *argv[]){ 
+    uint64_t hamming_weight=2, log_poly_mod_degree=13, code_size=0, alpha = 0, bitlength, ell=0;
+    bool batched=false, parallel=false;
 
-//     string write_path = "";
+    string write_path = "";
 
-//     if (argc < 2){
-//         cout << "Try again" << endl;
-//         return 0;
-//     }
+    if (argc < 2){
+        cout << "Try again" << endl;
+        return 0;
+    }
 
-//     const char * type = argv[1];
+    const char * type = argv[1];
 
-//     int opt;
-//     while((opt = getopt(argc, argv, "k:d:w:a:m:b:l:vp")) != -1){  
-//         switch(opt){
-//             case 'm':
-//                 code_size = stoi(optarg);
-//                 break;
-//             case 'k':
-//                 hamming_weight = stoi(optarg);
-//                 break;
-//             case 'd':
-//                 log_poly_mod_degree = stoi(optarg);
-//                 break;
-//             case 'a':
-//                 alpha = stoi(optarg);
-//                 break;
-//             case 'b':
-//                 bitlength = stoi(optarg);
-//                 break;
-//             case 'l':
-//                 ell = stoi(optarg);
-//                 break;
-//             case 'w':
-//                 write_path = optarg;
-//                 break;
-//             case 'v':
-//                 batched = true;
-//                 break;
-//             case 'p':
-//                 parallel = true;
-//                 break;
-//             case ':':
-//                 printf("option needs a value\n");  
-//                 break;
-//             case '?':
-//                 printf("unknown option: %c\n", optopt); 
-//                 break; 
-//         }
-//     }
+    int opt;
+    while((opt = getopt(argc, argv, "k:d:w:a:m:b:l:vp")) != -1){  
+        switch(opt){
+            case 'm':
+                code_size = stoi(optarg);
+                break;
+            case 'k':
+                hamming_weight = stoi(optarg);
+                break;
+            case 'd':
+                log_poly_mod_degree = stoi(optarg);
+                break;
+            case 'a':
+                alpha = stoi(optarg);
+                break;
+            case 'b':
+                bitlength = stoi(optarg);
+                break;
+            case 'l':
+                ell = stoi(optarg);
+                break;
+            case 'w':
+                write_path = optarg;
+                break;
+            case 'v':
+                batched = true;
+                break;
+            case 'p':
+                parallel = true;
+                break;
+            case ':':
+                printf("option needs a value\n");  
+                break;
+            case '?':
+                printf("unknown option: %c\n", optopt); 
+                break; 
+        }
+    }
+    
+    if (strcmp(type,"cw-bin")==0){
+        std::cout << "Constant-weight Binary" << endl;
+        if (code_size == 0) code_size = code_size_from_ell(ell, hamming_weight);
+        constant_weight_binary(code_size, hamming_weight, log_poly_mod_degree, max(alpha,ell), batched, parallel, write_path);
+    } else if (strcmp(type,"cw-arith")==0){
+        std::cout << "Constant-weight Arithmetic" << endl;
+        if (code_size == 0) code_size = code_size_from_ell(ell, hamming_weight);
+        constant_weight_arith(code_size, hamming_weight, log_poly_mod_degree, max(alpha,ell) , batched, parallel, write_path);
+    } else if (strcmp(type,"cw-plain")==0){
+        std::cout << "Constant-weight Plain" << endl;
+        if (code_size == 0) code_size = code_size_from_ell(ell, hamming_weight);
+        constant_weight_plain(code_size, hamming_weight, log_poly_mod_degree, max(alpha,ell) , batched, parallel, write_path);
+    } else if (strcmp(type,"br")==0) {
+        std::cout << "Binary Raffle" << endl;
+        binary_raffle(bitlength, alpha, log_poly_mod_degree, batched, parallel, write_path);
+    } else if (strcmp(type,"fl-bin")==0) {
+        std::cout << "Binary Folklore" << endl;
+        binary_folklore(ell, log_poly_mod_degree, batched, parallel, write_path);
+    } else if (strcmp(type,"fl-arith")==0) {
+        std::cout << "Arithmetic Folklore" << endl;
+        arithmetic_folklore(ell, log_poly_mod_degree, batched, parallel, write_path);
+    } else if (strcmp(type,"fl-plain")==0) {
+        std::cout << "Plain Folklore" << endl;
+        plain_folklore(ell, log_poly_mod_degree, batched, parallel, write_path);
+    }
 
-//     if (strcmp(type,"cw-bin")==0){
-//         std::cout << "Constant-weight Binary" << endl;
-//         constant_weight_binary(code_size, hamming_weight, log_poly_mod_degree, max(alpha,ell), batched, parallel, write_path);
-//     } else if (strcmp(type,"cw-arith")==0){
-//         std::cout << "Constant-weight Arithmetic" << endl;
-//         constant_weight_arith(code_size, hamming_weight, log_poly_mod_degree, max(alpha,ell) , batched, parallel, write_path);
-//     } else if (strcmp(type,"cw-plain")==0){
-//         std::cout << "Constant-weight Plain" << endl;
-//         constant_weight_plain(code_size, hamming_weight, log_poly_mod_degree, max(alpha,ell) , batched, parallel, write_path);
-//     } else if (strcmp(type,"br")==0) {
-//         std::cout << "Binary Raffle" << endl;
-//         binary_raffle(bitlength, alpha, log_poly_mod_degree, batched, parallel, write_path);
-//     } else if (strcmp(type,"fl-bin")==0) {
-//         std::cout << "Binary Folklore" << endl;
-//         binary_folklore(ell, log_poly_mod_degree, batched, parallel, write_path);
-//     } else if (strcmp(type,"fl-arith")==0) {
-//         std::cout << "Arithmetic Folklore" << endl;
-//         arithmetic_folklore(ell, log_poly_mod_degree, batched, parallel, write_path);
-//     } else if (strcmp(type,"fl-plain")==0) {
-//         std::cout << "Plain Folklore" << endl;
-//         plain_folklore(ell, log_poly_mod_degree, batched, parallel, write_path);
-//     }
-
-// }
+}

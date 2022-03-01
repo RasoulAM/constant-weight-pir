@@ -9,6 +9,6 @@ add_subdirectory(googletest) # add googletest subdirectory
 
 include_directories(googletest/include) # this is so we can #include <gtest/gtest.h>
 
-add_executable(tests tests.cpp ../src/utils.cpp ../src/database.cpp ../src/pirutils.cpp)
+add_executable(tests tests.cpp ../src/utils.cpp ../src/database.cpp ../src/pirutils.cpp ../src/PIRserver.cpp)
 
 target_link_libraries(tests gtest SEAL::seal OpenMP::OpenMP_CXX)

@@ -250,11 +250,45 @@ void PIRserver::inner_product(QueryParameters* q_params, vector<Ciphertext>& sel
                 __ciphers[o].push_back(encrypted_compare[o]);
         }
     }
-    
+
     for (uint64_t o = 0; o < q_params->num_output_ciphers; o++){
         evaluator->add_many(__ciphers[o], encrypted_answer[o]);
     }        
     return;
+}
+
+void PIRserver::faster_inner_product(QueryParameters* q_params, vector<Ciphertext>& selection_vector, vector<Ciphertext>& encrypted_answer, bool _verbose){
+
+    #pragma omp parallel for
+    for (uint64_t i=0;i<selection_vector.size();i++){
+        this->evaluator->transform_to_ntt_inplace(selection_vector[i]);
+    } 
+
+    vector<Ciphertext>* __sub_ciphers = new vector<Ciphertext>[q_params->num_output_ciphers];
+
+    #pragma omp parallel
+    {
+        Ciphertext __operand;
+        #pragma omp for collapse(2)
+        for (uint64_t ch=0;ch<q_params->db_->num_keywords;ch++){
+            for (uint64_t o=0;o<q_params->num_output_ciphers;o++){
+                this->evaluator->multiply_plain(selection_vector[ch], q_params->coefficient_vector_pt[ch][o], __operand);
+                #pragma omp critical
+                {
+                    __sub_ciphers[o].push_back(__operand);
+                }
+            }
+        }
+
+    }
+
+    #pragma omp parallel for
+    for (uint64_t o = 0; o < q_params->num_output_ciphers; o++){
+        this->evaluator->add_many(__sub_ciphers[o], encrypted_answer[o]);
+    }
+
+    return;
+
 }
 
 void PIRserver::set_params(stringstream &parms_stream, stringstream &sk_stream, bool _verbose){
@@ -307,7 +341,7 @@ void PIRserver::respond_pir_query(stringstream &data_stream, QueryParameters *q_
 
     // Inner product
     this->time_start = chrono::high_resolution_clock::now();
-        inner_product(q_params, selection_vector, encrypted_answer, _verbose);
+        faster_inner_product(q_params, selection_vector, encrypted_answer, _verbose);
     this->time_end = chrono::high_resolution_clock::now();
     this->time_diff = chrono::duration_cast<chrono::microseconds>(this->time_end - this->time_start);
     q_params->metrics_["time_inner_prod"] = this->time_diff.count();
