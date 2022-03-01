@@ -1026,13 +1026,6 @@ void benchmark_ops(uint64_t log_poly_modulus_degree=13, int RUNS=1000){
     }
 }
 
-// int main(){
-//     benchmark_ops(11);
-//     benchmark_ops(12);
-//     benchmark_ops(13);
-//     benchmark_ops(14);
-// }
-
 uint64_t code_size_from_ell(uint64_t ell, uint64_t k){
     return find_log2_choose(k, ell);
 }

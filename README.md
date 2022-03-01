@@ -1,10 +1,10 @@
 # Constant-weight PIR
 
-Code for Constant-Weight Private Information Retrieval Using Constant-weight Equality Operators
+Implementation of Constant-Weight Private Information Retrieval Using Constant-weight Equality Operators
 
 ## Overview
 
-This repository contains the experimental code for Constant-weight PIR using constant-weight equality operators. The following figure shows the main steps of the protocol.
+This repository contains the experimental implementation of Constant-weight PIR using constant-weight equality operators proposed in the [paper](https://arxiv.org/abs/2202.07569). The following figure shows the main steps of the protocol.
 
 <p align="center">
   <img src="pir.png" />
@@ -43,7 +43,7 @@ Parameter                   | Function                                          
 --response_bytesize         | Byte size of the payload data in each row of the database                                           | one plaintext
 --verbose                   | Verbosity flag                                                                                      | true
 --write_path                | Path of the directory in which the results are written (the name of the file is a random number)    | None
---num_threads               | Number of threads to use (0: All threads available, max parallelization)                            | 0
+--num_threads               | Number of threads to use (0: Use all threads available, max parallelization)                        | 0
 
 ## Examples
 ```
@@ -64,3 +64,7 @@ cmake .. -DCMAKE_INSTALL_PREFIX=[PATH TO SEAL]
 make
 ./tests
 ```
+
+
+## Experimental Results
+The results shown in the paper can be reproduced using the implementation in this repository. The necessary scripts are available in `build/scripts`
