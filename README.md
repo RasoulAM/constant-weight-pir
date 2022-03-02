@@ -10,10 +10,15 @@ This repository contains the experimental implementation of Constant-weight PIR 
   <img src="pir.png" />
 </p>
 
+We also implement folklore PIR as described in the paper. Furthermore, we provide impelementations of the equality operators proposed in the paper for the purpose of benchmarking.
+
 ## Dependencies
 The project requires the following dependencies:
-* Microsoft SEAL (version 3.6)
-* Google Tests (for testing)
+* GNU G++ (version >= 6.0)
+* Microsoft SEAL (version >= 3.6)
+
+[Microsoft SEAL](https://github.com/microsoft/SEAL) can be installed, locally or globally, using the [instructions](https://github.com/microsoft/SEAL#building-microsoft-seal) outlined in the repository.
+
 ## Building the Project
 The project can be built using the following command in ```src/build```
 ```
@@ -21,7 +26,7 @@ cmake ..
 make 
 ```
 
-If SEAL is not in your path, you can use the following command
+If SEAL is not in your path or installed locally, you can use the following command
 ```
 cmake .. -DCMAKE_INSTALL_PREFIX=[PATH TO SEAL]
 make
@@ -53,8 +58,26 @@ Parameter                   | Function                                          
 ./main --num_keywords=10 --hamming_weight=2 --write_path=results/
 ```
 
+
+## Benchmarking Equality Operators
+
+The ```./benchmark_eq``` can be used to benchmark an equality of the following types: folklore plain (fl-plain), folklore arithmetic (fl-arith), folklore binary (fl-bin), constant-weight plain (cw-plain), constant-weight arithmetic (cw-arith), and constant-weight binary (cw-bin).
+The executable accepts the following parameters (the requried inputs depends on the type of equality operator)
+
+
+Parameter                   | Function                                                                                            | Default 
+:-------------------------: | :-------------------------------------------------------------------------------------------------: | :--------------------:
+-d       | Logarithm of the polynomial modulus degree in SEAL                                                  | 13
+-l         |  Bitlength of elements in the domain                            | -
+-m              | Length of Constant-weight Code (derived automatically if the bitlength of elements is given)                                                                  | -
+-k            | Hamming weight of the constant-weight code (applicable when the constant-weight operator is used)   | 2
+-p       | Whether to run in parallel or not | false
+-w                | Path of the directory in which the results are written (the name of the file is a random number)    | -
+-v         | Batched comparisons  | true
+
 ## Testing
-For building and running tests, run the following commands
+
+The repository is tested using the [googletest](https://github.com/google/googletest) framework. For building and running tests, run the following commands
 ```
 cd tests
 git clone https://github.com/google/googletest.git
@@ -67,4 +90,4 @@ make
 
 
 ## Experimental Results
-The results shown in the paper can be reproduced using the implementation in this repository. The necessary scripts are available in `build/scripts`
+The results shown in the paper can be reproduced using the implementation in this repository. The instructions reproduce the results are in the `src/build` directory

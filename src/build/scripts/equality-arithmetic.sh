@@ -1,7 +1,7 @@
 ###### Parameters ######
 RUN_FILE=./benchmark_eq
 RES_FILE=results/equality-arithmetic/
-RUNS=10
+RUNS=1
 ########################
 
 mkdir -p $RES_FILE

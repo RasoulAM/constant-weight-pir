@@ -117,8 +117,17 @@ int binary_folklore(uint64_t ell, uint64_t log_poly_modulus_degree, bool batched
     uint64_t _id = chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now().time_since_epoch()).count() % 100000000000;
     string filename=write_path + to_string(_id);
     output_file.open( filename + ".csv");
-    output_file << "id,type,ell,poly_mod_degree,batched,num_threads,runtime" << endl;
-    output_file << _id << ",fl-bin," << ell << "," << poly_modulus_degree << "," << batched << "," << num_threads << "," << runtime_;
+    // output_file << "id,type,ell,poly_mod_degree,batched,num_threads,runtime" << endl;
+    // output_file << _id << ",fl-bin," << ell << "," << poly_modulus_degree << "," << batched << "," << num_threads << "," << runtime_;
+
+    output_file << "id," << _id << endl <<
+                   "type," << "fl-bin" << endl <<
+                   "ell," << ell << endl <<
+                   "poly_mod_degree," << poly_modulus_degree << endl <<
+                   "batched," << batched << endl <<
+                   "num_threads," << num_threads << endl <<
+                   "runtime," << runtime_ << endl;
+
     output_file.close();
 
     return runtime_;
@@ -241,8 +250,17 @@ int arithmetic_folklore(uint64_t ell, uint64_t log_poly_modulus_degree, bool bat
     uint64_t _id = chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now().time_since_epoch()).count() % 100000000000;
     string filename=write_path + to_string(_id);
     output_file.open( filename + ".csv");
-    output_file << "id,type,ell,poly_mod_degree,batched,num_threads,runtime" << endl;
-    output_file << _id << ",fl-arith," << ell << "," << poly_modulus_degree << "," << batched << "," << num_threads << "," << runtime_;
+    // output_file << "id,type,ell,poly_mod_degree,batched,num_threads,runtime" << endl;
+    // output_file << _id << ",fl-arith," << ell << "," << poly_modulus_degree << "," << batched << "," << num_threads << "," << runtime_;
+
+    output_file << "id," << _id << endl <<
+                   "type," << "fl-arith" << endl <<
+                   "ell," << ell << endl <<
+                   "poly_mod_degree," << poly_modulus_degree << endl <<
+                   "batched," << batched << endl <<
+                   "num_threads," << num_threads << endl <<
+                   "runtime," << runtime_ << endl;
+
     output_file.close();
 
     return runtime_;
@@ -358,8 +376,17 @@ int plain_folklore(uint64_t ell, uint64_t log_poly_modulus_degree, bool batched=
     uint64_t _id = chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now().time_since_epoch()).count() % 100000000000;
     string filename=write_path + to_string(_id);
     output_file.open( filename + ".csv");
-    output_file << "id,type,ell,poly_mod_degree,batched,num_threads,runtime" << endl;
-    output_file << _id << ",fl-plain," << ell << "," << poly_modulus_degree << "," << batched << "," << num_threads << "," << runtime_;
+    // output_file << "id,type,ell,poly_mod_degree,batched,num_threads,runtime" << endl;
+    // output_file << _id << ",fl-plain," << ell << "," << poly_modulus_degree << "," << batched << "," << num_threads << "," << runtime_;
+
+    output_file << "id," << _id << endl <<
+                   "type," << "fl-plain" << endl <<
+                   "ell," << ell << endl <<
+                   "poly_mod_degree," << poly_modulus_degree << endl <<
+                   "batched," << batched << endl <<
+                   "num_threads," << num_threads << endl <<
+                   "runtime," << runtime_ << endl;
+
     output_file.close();
 
     return runtime_;
@@ -481,8 +508,18 @@ int binary_raffle(uint64_t bitlength, uint64_t alpha, uint64_t log_poly_modulus_
     uint64_t _id = chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now().time_since_epoch()).count() % 100000000000;
     string filename=write_path + to_string(_id);
     output_file.open( filename + ".csv");
-    output_file << "id,type,bitlength,alpha,hamming_weight,poly_mod_degree,batched,num_threads,runtime" << endl;
-    output_file << _id << ",br," << bitlength << "," << alpha << "," << 0 << "," << poly_modulus_degree << "," << batched << "," << num_threads << "," << runtime_;
+    // output_file << "id,type,bitlength,alpha,hamming_weight,poly_mod_degree,batched,num_threads,runtime" << endl;
+    // output_file << _id << ",br," << bitlength << "," << alpha << "," << 0 << "," << poly_modulus_degree << "," << batched << "," << num_threads << "," << runtime_;
+
+    output_file << "id," << _id << endl <<
+                   "type," << "br" << endl <<
+                   "bitlength," << bitlength << endl <<
+                   "alpha," << alpha << endl <<
+                   "poly_mod_degree," << poly_modulus_degree << endl <<
+                   "batched," << batched << endl <<
+                   "num_threads," << num_threads << endl <<
+                   "runtime," << runtime_ << endl;
+
     output_file.close();
 
     return runtime_;
@@ -622,8 +659,19 @@ int constant_weight_binary(uint64_t m, uint64_t k, uint64_t log_poly_modulus_deg
     uint64_t _id = chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now().time_since_epoch()).count() % 100000000000;
     string filename=write_path + to_string(_id);
     output_file.open( filename + ".csv");
-    output_file << "id,type,encoding_size,hamming_weight,poly_mod_degree,alpha_or_ell,batched,num_threads,runtime" << endl;
-    output_file << _id << ",cw-bin," << m << "," << k << "," << poly_modulus_degree << "," << alpha_or_ell << "," << batched << "," << num_threads <<  "," << runtime_;
+    // output_file << "id,type,encoding_size,hamming_weight,poly_mod_degree,alpha_or_ell,batched,num_threads,runtime" << endl;
+    // output_file << _id << ",cw-bin," << m << "," << k << "," << poly_modulus_degree << "," << alpha_or_ell << "," << batched << "," << num_threads <<  "," << runtime_;
+    
+    output_file << "id," << _id << endl <<
+                   "type," << "cw-bin" << endl <<
+                   "encoding_size," << m << endl <<
+                   "hamming_weight," << k << endl <<
+                   "poly_mod_degree," << poly_modulus_degree << endl <<
+                   "alpha_or_ell," << alpha_or_ell << endl <<
+                   "batched," << batched << endl <<
+                   "num_threads," << num_threads << endl <<
+                   "runtime," << runtime_ << endl;
+    
     output_file.close();
 
     return runtime_;
@@ -766,8 +814,19 @@ int constant_weight_arith(uint64_t m, uint64_t k, uint64_t log_poly_modulus_degr
     uint64_t _id = chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now().time_since_epoch()).count() % 100000000000;
     string filename=write_path + to_string(_id);
     output_file.open( filename + ".csv");
-    output_file << "id,type,encoding_size,hamming_weight,poly_mod_degree,alpha_or_ell,batched,num_threads,runtime" << endl;
-    output_file << _id << ",cw-arith," << m << "," << k << "," << poly_modulus_degree << "," << alpha_or_ell << "," << batched << "," << num_threads << "," << runtime_;
+    // output_file << "id,type,encoding_size,hamming_weight,poly_mod_degree,alpha_or_ell,batched,num_threads,runtime" << endl;
+    // output_file << _id << ",cw-arith," << m << "," << k << "," << poly_modulus_degree << "," << alpha_or_ell << "," << batched << "," << num_threads << "," << runtime_;
+
+    output_file << "id," << _id << endl <<
+                   "type," << "cw-arith" << endl <<
+                   "encoding_size," << m << endl <<
+                   "hamming_weight," << k << endl <<
+                   "poly_mod_degree," << poly_modulus_degree << endl <<
+                   "alpha_or_ell," << alpha_or_ell << endl <<
+                   "batched," << batched << endl <<
+                   "num_threads," << num_threads << endl <<
+                   "runtime," << runtime_ << endl;
+    
     output_file.close();
 
     return runtime_;
@@ -878,8 +937,18 @@ int constant_weight_plain(uint64_t m, uint64_t k, uint64_t log_poly_modulus_degr
     uint64_t _id = chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now().time_since_epoch()).count() % 100000000000;
     string filename=write_path + to_string(_id);
     output_file.open( filename + ".csv");
-    output_file << "id,type,encoding_size,hamming_weight,poly_mod_degree,alpha_or_ell,batched,num_threads,runtime" << endl;
-    output_file << _id << ",cw-plain," << m << "," << k << "," << poly_modulus_degree << "," << alpha_or_ell << "," << batched << "," << num_threads << "," << runtime_;
+    // output_file << "id,type,encoding_size,hamming_weight,poly_mod_degree,alpha_or_ell,batched,num_threads,runtime" << endl;
+    // output_file << _id << ",cw-plain," << m << "," << k << "," << poly_modulus_degree << "," << alpha_or_ell << "," << batched << "," << num_threads << "," << runtime_;
+    output_file << "id," << _id << endl <<
+                   "type," << "cw-plain" << endl <<
+                   "encoding_size," << m << endl <<
+                   "hamming_weight," << k << endl <<
+                   "poly_mod_degree," << poly_modulus_degree << endl <<
+                   "alpha_or_ell," << alpha_or_ell << endl <<
+                   "batched," << batched << endl <<
+                   "num_threads," << num_threads << endl <<
+                   "runtime," << runtime_ << endl;
+    
     output_file.close();
 
     return runtime_;
