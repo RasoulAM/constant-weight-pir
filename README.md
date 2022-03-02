@@ -88,6 +88,14 @@ make
 ./tests
 ```
 
+## Examples
+```
+./benchmark_eq fl-plain -l 8
+./benchmark_eq fl-arith -l 16 -d 14 -p -v
+./benchmark_eq cw-plain -k 2 -l 32 -p
+./benchmark_eq cw-arith -k 3 -w results-eq/ -p -v
+```
+
 
 ## Experimental Results
 The results shown in the paper can be reproduced using the implementation in this repository. The instructions reproduce the results are in the `src/build` directory
