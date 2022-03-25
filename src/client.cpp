@@ -152,7 +152,7 @@ bool Client::validate_response(QueryParameters* q_params, uint64_t _query_keywor
         if (__equal){
                 cout << "Correct Response!" << endl;
         } else {
-                cout << "Incorrect Reponse!" << endl;
+                cout << "Incorrect Response!" << endl;
         }
     }
     return __equal;
